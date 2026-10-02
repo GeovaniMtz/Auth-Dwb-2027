@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dwb.auth.dto.in.LoginRequest;
+import com.dwb.auth.dto.out.UserResponse;
 import com.dwb.auth.entity.User;
 import com.dwb.auth.util.JwtUtil;
 
@@ -36,5 +39,11 @@ public class CtrlAuth {
         User user = (User) auth.getPrincipal();
         String token = jwtUtil.generateToken(user);
         return Map.of("token", token);
+    }
+
+    @Operation(summary = "Mi perfil", description = "Devuelve los datos del usuario dueño del token")
+    @GetMapping("/me")
+    public UserResponse me(@AuthenticationPrincipal User user) {
+        return new UserResponse(user);
     }
 }
