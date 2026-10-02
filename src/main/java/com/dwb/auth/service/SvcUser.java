@@ -1,13 +1,15 @@
 package com.dwb.auth.service;
 
-import com.dwb.auth.entity.User;
 import java.util.List;
 
-public interface SvcUser{
-    
-    //Crear un usuario
-    User createUser(User user);
+import com.dwb.auth.dto.in.UserRequest;
+import com.dwb.auth.dto.out.UserResponse;
 
-    //Obtener todos los usuarios
-    List<User> getUsers();
+public interface SvcUser {
+
+    // Crear un usuario
+    String createUser(UserRequest userRequest);
+
+    // Obtener todos los usuarios
+    List<UserResponse> getUsers();
 }

@@ -19,8 +19,7 @@ public class DefaultUserAuthentication implements UserDetailsService {
             throws UsernameNotFoundException {
         return repoUser
                 .findByUsername(username)
-                .orElseThrow(() ->
-                    new UsernameNotFoundException("User not found with username: " + username)
-                );
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        "User not found with username: " + username));
     }
 }

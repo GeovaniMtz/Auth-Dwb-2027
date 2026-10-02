@@ -1,19 +1,21 @@
 package com.dwb.auth.util;
 
+import java.security.Key;
+import java.util.Date;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
 import com.dwb.auth.entity.User;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-import java.security.Key;
-import java.util.Date;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET =
-        "mi_clave_super_secreta_para_jwt_segura_2026_abcdef";
+    private final String SECRET = "mi_clave_super_secreta_para_jwt_segura_2026_abcdef";
 
     private final Key key = Keys.hmacShaKeyFor(SECRET.getBytes());
 
