@@ -12,4 +12,7 @@ public interface SvcUser {
 
     // Obtener todos los usuarios
     List<UserResponse> getUsers();
+
+    // Eliminar un usuario
+    String deleteUser(Long id);
 }

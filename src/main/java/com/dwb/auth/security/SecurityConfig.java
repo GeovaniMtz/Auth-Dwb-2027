@@ -43,6 +43,7 @@ public class SecurityConfig {
 
                         // Solo Administrator
                         .requestMatchers(HttpMethod.GET, "/user").hasAuthority("Administrator")
+                        .requestMatchers(HttpMethod.DELETE, "/user/*").hasAuthority("Administrator")
 
                         .anyRequest().authenticated())
                 .sessionManagement(s -> s

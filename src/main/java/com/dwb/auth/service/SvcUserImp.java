@@ -5,8 +5,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.dwb.auth.dto.in.UserRequest;
 import com.dwb.auth.dto.out.UserResponse;
@@ -62,5 +64,14 @@ public class SvcUserImp implements SvcUser {
         return repoUser.findAll().stream()
                 .map(UserResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public String deleteUser(Long id) {
+        if (!repoUser.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El usuario no existe");
+        }
+        repoUser.deleteById(id);
+        return "Usuario eliminado exitosamente";
     }
 }
